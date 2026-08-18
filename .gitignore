@@ -1,0 +1,11 @@
+target/
+.idea/
+.vscode/
+.claude/
+*.iml
+*.log
+.env
+node_modules/
+dist/
+backend/
+caveman/

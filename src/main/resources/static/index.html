@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distributed Code Judge</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<section id="authGate" class="auth-gate">
+    <div class="auth-card">
+        <div class="brand">
+            <span class="brand-mark">DCJ</span>
+            <div>
+                <h1>Distributed Code Judge</h1>
+                <p>Sign in to continue</p>
+            </div>
+        </div>
+        <section class="auth-panel">
+            <label>
+                <span>Email</span>
+                <input id="email" type="email" value="demo@example.com" maxlength="120" autocomplete="email">
+            </label>
+            <label>
+                <span>Password</span>
+                <input id="password" type="password" maxlength="120" autocomplete="current-password">
+            </label>
+            <div class="auth-actions">
+                <button id="passwordLoginBtn" type="button">Password</button>
+                <button id="emailLoginBtn" type="button">Email only</button>
+            </div>
+            <p id="authStatus">Authentication required.</p>
+        </section>
+    </div>
+</section>
+
+<main id="appShell" class="shell locked">
+    <section class="workspace">
+        <aside class="sidebar">
+            <div class="brand">
+                <span class="brand-mark">DCJ</span>
+                <div>
+                    <h1>Distributed Code Judge</h1>
+                    <p>Async execution workbench</p>
+                </div>
+            </div>
+
+            <section class="account-summary">
+                <h2>Account</h2>
+                <strong id="currentUserName">Signed in</strong>
+                <span id="currentUserEmail"></span>
+                <button id="signOutBtn" type="button">Sign out</button>
+            </section>
+
+            <div class="metric-grid" aria-label="System metrics">
+                <div class="metric">
+                    <span>Running</span>
+                    <strong id="runningCount">0</strong>
+                </div>
+                <div class="metric">
+                    <span>Accepted</span>
+                    <strong id="acceptedCount">0</strong>
+                </div>
+                <div class="metric">
+                    <span>Rejected</span>
+                    <strong id="rejectedCount">0</strong>
+                </div>
+            </div>
+
+            <h2>Problems</h2>
+            <div id="problemList" class="problem-list"></div>
+        </aside>
+
+        <section class="judge-panel">
+            <header class="toolbar">
+                <div>
+                    <p class="eyebrow">Submission Intake</p>
+                    <h2 id="problemTitle">Loading problems</h2>
+                </div>
+                <div class="toolbar-actions">
+                    <label>
+                        <span>Language</span>
+                        <select id="language">
+                            <option value="JAVA">Java</option>
+                            <option value="PYTHON">Python</option>
+                            <option value="C">C</option>
+                            <option value="CPP">C++</option>
+                        </select>
+                    </label>
+                </div>
+            </header>
+
+            <div class="problem-detail">
+                <p id="problemStatement"></p>
+                <div class="sample-grid">
+                    <div>
+                        <span>Sample input</span>
+                        <pre id="sampleInput"></pre>
+                    </div>
+                    <div>
+                        <span>Sample output</span>
+                        <pre id="sampleOutput"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor-wrap">
+                <div class="editor-head">
+                    <span>Source code</span>
+                    <div class="template-actions">
+                        <button id="acceptedTemplate" type="button" title="Load passing template">AC</button>
+                        <button id="wrongTemplate" type="button" title="Load wrong answer template">WA</button>
+                        <button id="tleTemplate" type="button" title="Load timeout template">TLE</button>
+                    </div>
+                </div>
+                <textarea id="sourceCode" spellcheck="false"></textarea>
+            </div>
+
+            <div class="submit-row">
+                <button id="submitBtn" type="button">Submit</button>
+                <p id="statusLine">Ready to submit.</p>
+            </div>
+        </section>
+
+        <aside class="activity">
+            <h2>Pipeline</h2>
+            <div class="pipeline">
+                <div class="stage active" id="stageValidate"><span>1</span>Validate</div>
+                <div class="stage" id="stageQueue"><span>2</span>Queue</div>
+                <div class="stage" id="stageRun"><span>3</span>Worker</div>
+                <div class="stage" id="stageVerdict"><span>4</span>Verdict</div>
+            </div>
+
+            <h2>Current Result</h2>
+            <div class="result-box">
+                <div class="verdict" id="currentVerdict">PENDING</div>
+                <dl>
+                    <div><dt>Submission</dt><dd id="currentSubmission">None</dd></div>
+                    <div><dt>Runtime</dt><dd id="currentRuntime">0 ms</dd></div>
+                    <div><dt>Memory</dt><dd id="currentMemory">0 MB</dd></div>
+                </dl>
+                <pre id="currentOutput">No output yet.</pre>
+            </div>
+
+            <h2>Recent Submissions</h2>
+            <div id="recentList" class="recent-list"></div>
+        </aside>
+    </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
